@@ -1,0 +1,1 @@
+export { styleCommon } from './Styles'
