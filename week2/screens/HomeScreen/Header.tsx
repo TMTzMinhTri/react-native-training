@@ -7,18 +7,18 @@ export const Header = () => {
         <Image
             style={styles.avata}
             source={require("../../assets/avata.jpg")} />
-        <View style={styles.wrapContent}>
+        <View style={styleCommon.marginLeft30}>
             <Text style={styles.title}>Trần Minh Tri</Text>
             <Text style={styles.subtitle}>Frontend Developer</Text>
             <View style={styleCommon.directionRow}>
                 <TouchableOpacity >
                     <View style={styles.btnFollow}>
-                        <Text style={styles.btntext}>Follow</Text>
+                        <Text style={styleCommon.colorWhite}>Follow</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity >
                     <View style={styles.btnFollow}>
-                        <Text style={styles.btntext}>Follow</Text>
+                        <Text style={styleCommon.colorWhite}>Follow</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -49,12 +49,6 @@ const styles = StyleSheet.create({
         height: 100,
         borderRadius: 50
     },
-    wrapContent: {
-        marginLeft: 30
-    },
-    wrapButton: {
-        flexDirection: "row"
-    },
     btnFollow: {
         paddingVertical: 8,
         paddingHorizontal: 7,
@@ -63,8 +57,5 @@ const styles = StyleSheet.create({
         alignItems: "center",
         borderRadius: 50,
         color: "#fff"
-    },
-    btntext: {
-        color: "#fff"
-    },
+    }
 });
