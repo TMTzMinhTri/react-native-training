@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import { styleCommon } from "../Utils";
+import { styleCommon } from "../../Utils";
+import { MaterialIcons } from '@expo/vector-icons';
 
 export const Header = () => {
     return <View style={styles.header}>
@@ -17,8 +18,8 @@ export const Header = () => {
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity >
-                    <View style={styles.btnFollow}>
-                        <Text style={styleCommon.colorWhite}>Follow</Text>
+                    <View style={styles.btnShare}>
+                        <MaterialIcons name="send" size={18} color="#fff" />
                     </View>
                 </TouchableOpacity>
             </View>
@@ -28,7 +29,7 @@ export const Header = () => {
 
 const styles = StyleSheet.create({
     header: {
-        flex: 0.25,
+        flex: 0.2,
         alignItems: "flex-end",
         marginTop: 30,
         flexDirection: "row",
@@ -52,10 +53,19 @@ const styles = StyleSheet.create({
     btnFollow: {
         paddingVertical: 8,
         paddingHorizontal: 7,
-        backgroundColor: "blue",
-        width: 80,
+        backgroundColor: "#3b71ff",
+        width: 100,
         alignItems: "center",
         borderRadius: 50,
         color: "#fff"
+    },
+    btnShare: {
+        paddingVertical: 8,
+        paddingHorizontal: 7,
+        backgroundColor: "#56d8fe",
+        width: 60,
+        borderRadius: 50,
+        alignItems: "center",
+        marginLeft:10
     }
 });
