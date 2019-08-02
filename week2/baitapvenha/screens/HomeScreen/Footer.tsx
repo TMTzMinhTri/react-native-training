@@ -1,17 +1,17 @@
 import React from "react"
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native';
 import { Ionicons, MaterialIcons, Octicons } from '@expo/vector-icons';
 
 
 export const Footer = () => {
     return <View style={styles.footer}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => Alert.alert('Minh Tri')}>
             <Octicons name="link" size={30} />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => Alert.alert('Minh Tri')}>
             <Ionicons name="ios-add-circle-outline" size={30} />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => Alert.alert('Minh Tri')}>
             <MaterialIcons name="person-outline" size={30} />
         </TouchableOpacity>
     </View>

@@ -1,5 +1,5 @@
 import React from "react"
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import { Iimages } from "../../App";
 
 let items = [
@@ -20,14 +20,16 @@ export const Body: React.FC<IBodyProp> = ({ images }) => {
     )
     let image = images.map((item, index) => (
         <View key={index} style={{ padding: 10 }} >
-            <Image source={{ uri: item.imgSrc }} style={{ width: 170, minHeight: 100, borderRadius: 10 }} />
+            <Image source={{ uri: item.imgSrc }} style={{ width: 100, minHeight: 100, borderRadius: 10 }} />
         </View>
     ))
     return <View style={styles.body}>
         <View style={styles.wrap}>{item}</View>
-        <View style={{ flexDirection: "row", flexWrap: "wrap", padding: 15, justifyContent: "center" }}>
-            {image}
-        </View>
+        <ScrollView>
+            <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "center" }}>
+                {image}
+            </View>
+        </ScrollView>
     </View>
 }
 const styles = StyleSheet.create({
