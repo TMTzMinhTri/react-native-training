@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Alert, Button } from 'react-native';
 import { styles } from "./assets/styles";
 import { ChoiceCard } from './components/choiceCard'
 
@@ -16,8 +16,12 @@ interface IStateApp {
   participant: string,
   userChoice: Ichoices,
   computerchoice: Ichoices,
+  turn: number,
+  winGame: number,
+  loseGame: number,
+  tieGame: number
 }
-const fakedata = [
+const fakedata: Ichoices[] = [
   {
     name: 'rock',
     uri: 'http://pngimg.com/uploads/stone/stone_PNG13622.png',
@@ -42,7 +46,11 @@ export default class App extends React.Component<{}, IStateApp> {
       participant: null,
       userChoice: null,
       computerchoice: null,
-      choices: fakedata
+      choices: fakedata,
+      turn: 0,
+      winGame: 0,
+      loseGame: 0,
+      tieGame: 0
     };
   }
 
@@ -52,7 +60,7 @@ export default class App extends React.Component<{}, IStateApp> {
 }
 
 const renderContent = (component: App) => {
-  let { gamePrompt, userChoice, computerchoice } = component.state;
+  let { gamePrompt, userChoice, computerchoice, turn } = component.state;
   return <View style={styles.container}>
     <Text style={{ fontSize: 35, color: getResultColor(component) }}>
       {gamePrompt}
@@ -67,6 +75,11 @@ const renderContent = (component: App) => {
         choice={computerchoice} />
     </View>
     {renderButtonControl(component)}
+    <TouchableOpacity style={styles.buttonStyle}>
+      <Text style={styles.buttonText} onPress={() => ShowInfo(component)}>
+        Show details
+      </Text>
+    </TouchableOpacity>
   </View>
 }
 
@@ -85,14 +98,25 @@ const renderButtonControl = (Component: App) => {
 }
 
 const onPress = (component: App, playerChoice: string) => {
-  let { choices } = component.state
-  const [result, compChoice] = getRoundOutcome(component, playerChoice);
+  let { choices, turn, winGame, loseGame, tieGame } = component.state
+  const [Result, compChoice] = getRoundOutcome(component, playerChoice);
+  if (Result === result.victory) {
+    winGame = winGame + 1
+  } else if (Result === result.defeat) {
+    loseGame = loseGame + 1
+  } else {
+    tieGame = tieGame + 1
+  }
   const newUserChoice = choices.find(choice => choice.name === playerChoice);
   const newComputerChoice = choices.find(choice => choice.name === compChoice);
   component.setState({
     userChoice: newUserChoice,
-    gamePrompt: result,
-    computerchoice: newComputerChoice
+    gamePrompt: Result,
+    computerchoice: newComputerChoice,
+    turn: turn + 1,
+    winGame,
+    loseGame,
+    tieGame
   })
 };
 
@@ -110,8 +134,10 @@ const getRoundOutcome = (component: App, userChoice: string) => {
   }
 
   if (userChoice === computerChoice) Result = result.tie;
+
   return [Result, computerChoice];
 };
+
 const randomComputerChoice = (component: App) => {
   let { choices } = component.state
   return choices[Math.floor(Math.random() * choices.length)];
@@ -123,6 +149,35 @@ const getResultColor = (component: App) => {
   if (gamePrompt === result.defeat) return 'red';
   return null;
 };
+
+const ShowInfo = (component: App) => {
+  let { turn, winGame, loseGame, tieGame } = component.state
+  let winPercentages = Math.round(winGame / turn * 100)
+  let losePercentages = Math.round(loseGame / turn * 100)
+  let tiePercentages = Math.round(tieGame / turn * 100)
+  Alert.alert("Info game",
+    `Bạn đã chơi tổng cộng :${turn}
+    Win:: ${winGame}
+    lose: ${loseGame}
+    tie: ${tieGame}
+    win percentages: ${winPercentages} %
+    lose percentages: ${losePercentages} %
+    tie percentages: ${tiePercentages} %
+    `,
+    [
+      { text: 'Reset', onPress: () => resetGame(component) },
+      { text: 'OK' },
+    ]
+  )
+}
+const resetGame = (component: App) => {
+  component.setState({
+    tieGame: 0,
+    winGame: 0,
+    loseGame: 0,
+    turn: 0
+  })
+}
 
 enum participant {
   player = "Player",
