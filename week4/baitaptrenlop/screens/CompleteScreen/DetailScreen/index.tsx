@@ -11,6 +11,10 @@ export class DetailsScreen extends React.Component<IDetailsScreenProps, {}> {
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text>Details Screen</Text>
                 <Button
+                    title="Go to to do list"
+                    onPress={() => this.props.navigation.navigate('AllScreen')}
+                />
+                <Button
                     title="Go back"
                     onPress={() => this.props.navigation.goBack()}
                 />

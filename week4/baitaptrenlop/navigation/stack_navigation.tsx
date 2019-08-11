@@ -1,22 +1,42 @@
 import React from "react";
-import { createStackNavigator } from "react-navigation";
-import { HomeScreen } from "../screens/HomeScreen";
-import { DetailsScreen } from "../screens/DetailScreen";
+import { Platform } from "react-native";
+import { createStackNavigator, NavigationStackScreenOptions } from "react-navigation";
+import { CompleteScreen } from "../screens/CompleteScreen";
+import { DetailsScreen } from "../screens/CompleteScreen/DetailScreen";
+
+import { AllScreen } from "../screens/AllScreen";
+import { SingleTodoScreen } from "../screens/AllScreen/todoItem/detailItem";
 import { TabBarIcon } from '../components/TabBarIcon'
 
-export const HomeStack = createStackNavigator(
+export const CompleteStack = createStackNavigator(
     {
-        Home: HomeScreen,
+        Home: CompleteScreen,
         Details: DetailsScreen
     }
 );
 
-HomeStack.navigationOptions = {
-    tabBarLabel: "Trang chủ",
+CompleteStack.navigationOptions = {
+    tabBarLabel: "Complete",
     tabBarIcon: ({ focused }) => {
         return <TabBarIcon
             focused={focused}
-            name="ios-information-circle"
+            name={Platform.OS === 'ios' ? 'ios-done-all' : 'md-link'}
+        />
+    }
+}
+
+export const AllScreenStack = createStackNavigator(
+    {
+        AllScreen: AllScreen,
+        SingleTodo: SingleTodoScreen
+    }
+)
+AllScreenStack.navigationOptions = {
+    tabBarLabel: "All Todos",
+    tabBarIcon: ({ focused }) => {
+        return <TabBarIcon
+            focused={focused}
+            name={Platform.OS === 'ios' ? 'md-add-circle-outline' : 'md-link'}
         />
     }
 }
