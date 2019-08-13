@@ -6,16 +6,13 @@ interface IHomeScreenProps extends NavigationScreenProps {
 
 }
 
-export class CompleteScreen extends React.Component<IHomeScreenProps, {}> {
-    static navigationOptions = {
-        title: 'Home',
-    };
+export class HomeScreen extends React.Component<IHomeScreenProps, {}> {
     render() {
         return (
             <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-                <Text>Complete Screen</Text>
+                <Text>Home Screen</Text>
                 <Button
-                    title="Go to to do list"
+                    title="Go to Details"
                     onPress={() => this.props.navigation.navigate('Details')}
                 />
             </View>

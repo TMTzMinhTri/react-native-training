@@ -1,11 +1,8 @@
 import { createBottomTabNavigator } from "react-navigation";
-import { CompleteStack, AllScreenStack } from "./stack_navigation";
-
-
+import { HomeStack } from "./stack_navigation";
 
 const tabNavigator = createBottomTabNavigator({
-    CompleteStack,
-    AllScreenStack
+    HomeStack
 });
 
 export default tabNavigator;
