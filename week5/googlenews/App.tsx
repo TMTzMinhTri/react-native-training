@@ -13,7 +13,7 @@ export default function App() {
   const [lastPageReached, setLastPageReached] = React.useState<Boolean>(false);
   React.useEffect(() => {
     getNews(setArticles, setPageNumber, setLoading, setHasApiError, pageNumber, articles, lastPageReached, setLastPageReached)
-  }, [articles])
+  }, [getNews])
   const newgetnews = async () => {
     return await getNews(setArticles, setPageNumber, setLoading, setHasApiError, pageNumber, articles, lastPageReached, setLastPageReached)
   }
@@ -74,7 +74,7 @@ const filterForUniqueArticles = (arr: Array<Iarticle>) => {
   arr.forEach(itm => {
     let unique = true;
     cleaned.forEach(itm2 => {
-      const isEqual = JSON.stringify(itm) == JSON.stringify(itm2);
+      const isEqual = JSON.stringify(itm) === JSON.stringify(itm2);
       if (isEqual) unique = false;
     });
     if (unique) cleaned.push(itm);
