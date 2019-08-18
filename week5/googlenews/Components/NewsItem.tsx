@@ -6,10 +6,11 @@ import { Iarticle } from "../modal";
 
 
 interface IPropsNewsItem {
-    articles: Iarticle
+    articles: Iarticle,
+    onPress: Function
 }
 
-export const NewsItem: React.FC<IPropsNewsItem> = ({ articles }) => {
+export const NewsItem: React.FC<IPropsNewsItem> = ({onPress, articles}) => {
     return <Card title={articles.title} image={{ uri: articles.urlToImage }}>
         <View style={styles.row}>
             <Text style={styles.label}>Source</Text>
@@ -24,7 +25,8 @@ export const NewsItem: React.FC<IPropsNewsItem> = ({ articles }) => {
         </View>
         <Button
             title="Read more"
-            icon={<Icon name="rowing" />} />
+            icon={<Icon name="rowing" />}
+            onPress={() => onPress(articles.url)} />
     </Card>
 }
 
